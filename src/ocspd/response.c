@@ -451,14 +451,10 @@ PKI_X509_OCSP_RESP *make_ocsp_response(PKI_X509_OCSP_REQ *req, OCSPD_CONFIG *con
 				ext = X509_REVOKED_get_ext_d2i( entry, NID_invalidity_date, NULL, NULL );
 			}
 
-#if OPENSSL_VERSION_NUMBER >= 0x1010000fL
+
 			if ((PKI_X509_OCSP_RESP_add(resp, cid, PKI_OCSP_CERTSTATUS_REVOKED,
-					X509_REVOKED_get0_serialNumber(entry), thisupd, 
-									nextupd, reason, ext )) == PKI_ERR)
-#else
-			if ((PKI_X509_OCSP_RESP_add(resp, cid, PKI_OCSP_CERTSTATUS_REVOKED,
-					entry->revocationDate, thisupd, nextupd, reason, ext )) == PKI_ERR)
-#endif
+                                        X509_REVOKED_get0_revocationDate(entry), thisupd, nextupd, reason, ext )) == PKI_ERR)
+
 			{
 				PKI_log_err ("Can not add a simple resp into the OCSP response");
 

@@ -467,7 +467,7 @@ int OCSPD_build_ca_list ( OCSPD_CONFIG *handler,
 			subTmp_s = NULL;
 
 			// Retrieves the CA cert
-			if ((tmp_cert = PKI_X509_CERT_get_url(tmp_url, -1, NULL, NULL ))== NULL)
+			if ((tmp_cert = PKI_X509_CERT_get_url(tmp_url, PKI_DATA_FORMAT_UNKNOWN, NULL, NULL ))== NULL)
 			{
 				// Error, can not get the CA certificate from the
 				// provided URL in the configuration
@@ -822,8 +822,8 @@ int OCSPD_load_crl ( CA_LIST_ENTRY *ca, OCSPD_CONFIG *conf ) {
 	if (ca->crl) PKI_X509_CRL_free(ca->crl);
 
 	// Load the new CRL
-	if (( ca->crl = PKI_X509_CRL_get_url(ca->crl_url, 
-					     -1, NULL, NULL )) == NULL) {
+	if (( ca->crl = PKI_X509_CRL_get_url(ca->crl_url,
+                                         PKI_DATA_FORMAT_UNKNOWN, NULL, NULL )) == NULL) {
 
 		// Error, can not get the CRL from the URL
 		PKI_log_err("Failed loading CRL for [CA: %s, URL: %s]",
