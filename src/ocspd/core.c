@@ -43,7 +43,7 @@ int start_threaded_server ( OCSPD_CONFIG * ocspd_conf )
 			exit(1);
 		}
 
-		PKI_TOKEN_cred_set_cb ( ocspd_conf->token, NULL, NULL);
+		//PKI_TOKEN_cred_set_cb ( ocspd_conf->token, NULL, NULL);
 
 		if (PKI_TOKEN_login ( ocspd_conf->token ) != PKI_OK)
 		{
